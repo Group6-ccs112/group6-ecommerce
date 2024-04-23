@@ -1,7 +1,12 @@
 import React from "react";
 
 function ViewCart({ summary, setSummary }) {
- 
+  
+    function removeFromCart(index) {
+      setSummary(prevSummary => ({
+        items: prevSummary.items.filter((_, i) => i !== index)
+      }));
+    }
 
     const items = summary.items;
     const count = items.length;
@@ -24,6 +29,7 @@ function ViewCart({ summary, setSummary }) {
             <div>
               <strong>{item.name}</strong> - ${item.price}
             </div>
+            <button className="btn btn-danger" onClick={() => removeFromCart(index)}>Remove</button>
           </li>
         ))}
       </ul>
